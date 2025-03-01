@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title> Hayato Nasu's Homepage/Papers </title>
+        <script src="mathjax_setting.js" async></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+        <link rel="stylesheet" href="fonts/academicons-1.9.4/css/academicons.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link href="style.css" rel="stylesheet" type="text/css" media="all">
+    </head>
+    <body class="w3-light-grey">
+    <header> 
+    </header>
+
+    <div class="w3-content w3-margin-top" style="max-width:1400px;">
+    <div class="w3-row-padding">
+
+    <div class="w3-container">
+        <div id="mySidebar" class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="width:20%">
+            <button class="w3-bar-item w3-button w3-hide-large"
+            onclick="w3_close()">&times;</button>
+            <a href="index.html" class="w3-bar-item w3-button">Home</a>
+            <a href="papers.html" class="w3-bar-item w3-button">Research papers</a>
+            <a href="talks.html" class="w3-bar-item w3-button">Research talks</a>
+            <a href="others.html" class="w3-bar-item w3-button">Others</a>
+            <a href="indexj.html" class="w3-bar-item w3-button">日本語ページ（工事中）</a>
+        </div>
+    <div id="main" class="w3-white">
+        <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
+
+    <h1>Research papers</h1>
+    
+    <h2 class="w3-large"><b><i class="ai ai-arxiv w3-margin-right" style="color:#42602D;"></i>Preprints on ArXiv</b></h2>
+    <ul class="w3-ul w3-card-4">
+        <li>
+            <p><b> 
+            Logical Aspects of Virtual Double Categories (2025)
+            (master's thesis) </b>
+            <br>
+            <a href="https://arxiv.org/abs/2501.17869">arXiv:2501.17869</a> 
+            <a href="Papers/masterthesisupdated.pdf" class="w3-button w3-green w3-round-large"><i class="fa fa-download"></i>Updated version (2025/01/28)</a>
+        </li>
+        <li>
+            <p><b> 
+            An Internal Logic of Virtual Double Categories (2024)
+            </b>
+            <br>
+            <a href="https://arxiv.org/abs/2410.06792">arXiv:2410.06792</a>
+            <a href="Papers/FVDblTT.pdf" class="w3-button w3-green w3-round-large"><i class="fa fa-download"></i>Updated version (2024/10/10)</a>
+            <details>
+                <summary style="color: #42602D;">
+                    <i class="fa fa-caret-square-down"></i>
+                    Abstract
+                </summary>
+                We present a type theory called fibrational virtual double type theory (FVDblTT) designed specifically for formal category theory, which is a succinct reformulation of New and Licata’s Virtual Equipment Type Theory (VETT). FVDblTT formalizes reasoning on isomorphisms that are commonly employed in category theory. Virtual double categories are one of the most successful frameworks for developing formal category theory, and FVDblTT has them as a theoretical foundation. We validate its worth as an internal language of virtual double categories by providing a syntax-semantics duality between virtual double categories and specifications in FVDblTT as a biadjunction.
+            </details>    
+        </p>
+        </li>
+        <li>
+            <p> <b>
+            Double Categories of Relations Relative to Factorisation Systems, with Keisuke Hoshino (2023)
+            </b>
+            <br>
+            <a href="https://arxiv.org/abs/2310.19428">arXiv:2310.19428</a> 
+            <details>
+                <summary style="color: #42602D;">
+                    <i class="fa fa-caret-square-down"></i>
+                    Abstract
+                </summary>
+                We relativise double categories of relations to stable orthogonal factorisation systems. Furthermore, we present the characterisation of the relative double categories of relations in two ways. The first utilises a generalised comprehension scheme, and the second focuses on a specific class of vertical arrows defined solely double-categorically. We organise diverse classes of double categories of relations and correlate them with significant classes of factorisation systems. Our framework embraces double categories of spans and double categories of relations on regular categories, which we meticulously compare to existing work on the characterisations of bicategories and double categories of spans and relations.
+            </details>
+            </p>
+        </li>   
+    </ul>
+    </div>
+
+    <script>
+function w3_open() {
+  document.getElementById("main").style.marginLeft = "25%";
+  document.getElementById("mySidebar").style.width = "25%";
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("openNav").style.display = 'none';
+}
+function w3_close() {
+  document.getElementById("main").style.marginLeft = "0%";
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("openNav").style.display = "inline-block";
+}
+    </script>

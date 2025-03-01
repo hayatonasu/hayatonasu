@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title> Hayato Nasu's Homepage/Talks </title>
+        <script src="mathjax_setting.js" async></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+        <link rel="stylesheet" href="fonts/academicons-1.9.4/css/academicons.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link href="style.css" rel="stylesheet" type="text/css" media="all">
+    </head>
+    <body class="w3-light-grey">
+    <header> 
+    </header>
+
+    <div class="w3-content w3-margin-top" style="max-width:1400px;">
+    <div class="w3-row-padding">
+
+    <div class="w3-container">
+        <div id="mySidebar" class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="width:20%">
+            <button class="w3-bar-item w3-button w3-hide-large"
+            onclick="w3_close()">&times;</button>
+            <a href="index.html" class="w3-bar-item w3-button">Home</a>
+            <a href="papers.html" class="w3-bar-item w3-button">Research papers</a>
+            <a href="talks.html" class="w3-bar-item w3-button">Research talks</a>
+            <a href="others.html" class="w3-bar-item w3-button">Others</a>
+            <a href="indexj.html" class="w3-bar-item w3-button">日本語ページ（工事中）</a>
+        </div>
+    <div id="main" class="w3-white">
+        <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
+
+    <h1>Research talks</h1>
+    
+    <h2 class="w3-large"><b><i class="fa fa-person-chalkboard fa-fw w3-margin-right" style="color:#42602D;"></i>Talks</b></h2>
+    <ul class="w3-ul w3-card-4">
+        <li>
+            <b> Categorical logic meets double categories</b>
+            <p> These talks are on Chapter 2 of my master's thesis. </p>
+            </p>
+            <ul class="w3-ul">
+            <li>
+                    Cartesian bicategories and cartesian equipments: Categorical Logic Meets Double Categories- Side B,
+                    at CSCAT 2025, on March 11 2025.
+            </li>
+            <li>
+            Categorical logic meets double categories, at Logic Winter School, on February 21 2025.
+                <a href="Talks/LWS2025.pdf"><i class="fa fa-download"></i>Slides</a>
+            </li>
+            <li>
+                From Fibrations to Virtual Double Categories: Categorical Logic Meets Double Categories- Side A,
+                at Kyoto Category Theory Meeting, on February 22 2025
+                <a href="Talks/KCTM2025.pdf"><i class="fa fa-download"></i>Slides</a>
+            </li>
+            <li>
+                (Hyper)doctrines as virtual double categories, CSCAT2024 at the University of Chiba, on March 14 2024.
+                <a href="Talks/doctrine_as_vdc.pdf"><i class="fa fa-download"></i>Slides</a>
+                (This talk iss a preliminary version of the above talks.)
+            </li>
+            </ul>
+        </li>
+        <li>
+            <b> A Formal Theory of Anticolimits</b> 
+            <ul class="w3-ul">
+            <li>
+                at the workshop on Computer Science and Categorical Structures, on October 31 2024.
+                <a href="Talks/anticolimits_cscs2024.pdf" class="w3-button w3-green w3-round-large"><i class="fa fa-download"></i>Slides</a>
+            </li>
+            </ul>
+        </li>
+        <li>
+            <b> Double categories of Relations Relative to Factorization Systems</b> 
+            <ul class="w3-ul">
+            <li>
+                at CT2024, on June 25 2024.
+                <a href="Talks/DCR-CT2024.pdf"><i class="fa fa-download"></i>Slides</a>
+            </li>
+            <li>
+                at at the Thursday Seminar at RIMS, Kyoto University, on November 16 2023.
+                <a href="Talks/DCR-thursdayseminar.pdf"><i class="fa fa-download"></i>Slides</a>
+            </li>
+            </ul>
+        </li>
+        <li>
+            <b> Structural Set Theory -- Towards SEFAR -- </b>
+            <ul class="w3-ul">
+            <li>
+            at the Mathematical Foundations seminar for Young Generation 2023, on December 08 2023.
+                <a href="Talks/Structural_set_theory_fmyg23.pdf"><i class="fa fa-download"></i>Slides</a>
+            </li>
+            </ul>
+        </li>
+    </ul>
+
+
+    </div>
+    <script>
+        function w3_open() {
+  document.getElementById("main").style.marginLeft = "25%";
+  document.getElementById("mySidebar").style.width = "25%";
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("openNav").style.display = 'none';
+}
+
+function w3_close() {
+  document.getElementById("main").style.marginLeft = "0%";
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("openNav").style.display = "inline-block";
+}
+    </script>
