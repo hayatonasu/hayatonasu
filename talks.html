@@ -18,19 +18,19 @@
 
     <div class="w3-content w3-margin-top" style="max-width:1400px;">
     <div class="w3-row-padding">
+        <button id="openNav" class="w3-button w3-xlarge" onclick="w3_open()">&#9776;</button>
 
-    <div class="w3-container">
-        <div id="mySidebar" class="w3-sidebar w3-bar-block w3-animate-left w3-card" style="display:none;">
-            <button class="w3-bar-item w3-button "
-            onclick="w3_close()">&times;</button>
+        <div id="mySidebar" class="w3-sidebar w3-bar-block w3-animate-left w3-card" style="display:none">
+            <button class="w3-bar-item w3-button" onclick="w3_close()">&times;</button>
             <a href="index.html" class="w3-bar-item w3-button">Home</a>
             <a href="papers.html" class="w3-bar-item w3-button">Research papers</a>
             <a href="talks.html" class="w3-bar-item w3-button">Research talks</a>
             <a href="others.html" class="w3-bar-item w3-button">Others</a>
-            <a href="indexj.html" class="w3-bar-item w3-button">日本語ページ（工事中）</a>
-        </div>
+            <a href="notejapanese.html" class="w3-bar-item w3-button">日本語ノート</a>
+    </div>
+
+    <div class="w3-container">
     <div id="main" class="w3-white">
-        <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
 
     <div id="main" class="w3-white w3-row-padding w3-margin-top" style="margin-left:3%;">
 
@@ -39,10 +39,20 @@
     <h2 class="w3-large"><b><i class="fa fa-person-chalkboard fa-fw w3-margin-right" style="color:#42602D;"></i>Talks</b></h2>
     <ul class="w3-ul w3-card-4">
         <li>
-            <b> Categorical logic meets double categories</b>
-            <p> These talks are on Chapter 2 of my master's thesis. </p>
+            <b> Categorical logic meets double categories (Chapter 2 of my master's thesis) </b>
+            <p>  </p>
             </p>
+            <details>
+                <summary>
+                    <i class="fa fa-caret-square-down"></i>
+                    List of talks
+                </summary>
             <ul class="w3-ul">
+            <li>
+                    Exploring double categories of relations,
+                    at 32nd Foundational Methods in Computer Science Workshop, on June 18 2025.
+                    <a href="Talks/FMCS2025.pdf"><i class="fa fa-download"></i>Slides</a>
+            </li>
             <li>
                     Double categories of relations relative to factorization systems and fibrations,
                     at the 2025 CMS Summer Meeting, on June 8 2025.
@@ -68,6 +78,7 @@
                 (This talk iss a preliminary version of the above talks.)
             </li>
             </ul>
+            </details>
         </li>
         <li>
             <b> A Formal Theory of Anticolimits</b> 
