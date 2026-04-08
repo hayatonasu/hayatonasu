@@ -48,18 +48,9 @@
         </p>
         <p> I belong to the <a href="https://www.mathstat.dal.ca/~selinger/atcat/">Applied Category Theory Group </a>. </p>
         <p> My name is pronounced as /hajato nasu/. </p>
-        
 
         <p>Email : Replace $\Theta$ with @ in hnasu$\Theta$dal.ca </p>
         </div>
-
-        <!-- <div class="w3-container">
-        <h2 class="w3-large"><b><i class="fa fa-exclamation fa-fw w3-margin-right" style="color:#42602D;"></i> What's New</b></h2>
-        <p>
-        Slides for my ATCAT talk are available <a href="Talks/atcat2025.pdf" style="color: crimson;">here</a>.
-        </p>
-        </div> -->
-
 
         <div class="w3-container">
         <h2 class="w3-large"><b><i class="fa fa-seedling fa-fw w3-margin-right" style="color:#42602D;"></i>Research Interests</b></h2>
@@ -73,6 +64,12 @@
         </div>  
     </div>
 
+    <footer>
+        <p class="w3-right w3-small">
+            All rights reserved. (Last updated: <span id="spanDate"></span>)
+        </p>
+
+    </footer>
 
     <script>
 function w3_open() {
@@ -86,6 +83,7 @@ function w3_close() {
   document.getElementById("mySidebar").style.display = "none";
   document.getElementById("openNav").style.display = "inline-block";
 }
+    $('#spanDate').html(new Date().toLocaleDateString());
     </script>
         
     </body>
