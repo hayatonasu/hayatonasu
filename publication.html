@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset='utf-8'>
-        <title> Hayato Nasu's Homepage/Papers </title>
+        <title> Hayato Nasu's Homepage/Publications </title>
         <script src="mathjax_setting.js" async></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,16 +11,64 @@
         <link rel="stylesheet" href="fonts/academicons-1.9.4/css/academicons.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <link href="style.css" rel="stylesheet" type="text/css" media="all">
+        <link rel="stylesheet" href="zotero-publications.min.css">
     </head>
     <body class="w3-light-grey">
-    <header> 
-        <link rel="stylesheet" href="zotero-publications.min.css">
+    <header>
     </header>
 
-    <div id="container"></div>
+    <div class="w3-content w3-margin-top" style="max-width:1400px;">
+    <div class="w3-row-padding">
+        <button id="openNav" class="w3-button w3-xlarge" onclick="w3_open()">&#9776;</button>
+
+        <div id="mySidebar" class="w3-sidebar w3-bar-block w3-animate-left w3-card" style="display:none">
+            <button class="w3-bar-item w3-button" onclick="w3_close()">&times;</button>
+            <a href="index.html" class="w3-bar-item w3-button">Home</a>
+            <a href="papers.html" class="w3-bar-item w3-button">Research papers</a>
+            <a href="talks.html" class="w3-bar-item w3-button">Research talks</a>
+            <a href="others.html" class="w3-bar-item w3-button">Others</a>
+            <a href="notejapanese.html" class="w3-bar-item w3-button">日本語ノート</a>
+        </div>
+
+    <div class="w3-container">
+    <div id="main" class="w3-white w3-row-padding w3-margin-top" style="margin-left:3%;">
+
+        <h1>Publications</h1>
+
+        <div id="container"></div>
+
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <footer>
+        <p class="w3-right w3-small">
+        Comments are welcome! (email: hnasu [at] dal.ca)
+        </p>
+    </footer>
+
     <script src="zotero-publications.min.js"></script>
-<script>
-  new ZoteroPublications(10978498, document.getElementById('container'));
-</script>
-</body>
+    <script>
+        new ZoteroPublications(10978498, document.getElementById('container'), {
+            group: 'type',
+            expand: 'all'
+        });
+    </script>
+
+    <script>
+function w3_open() {
+  document.getElementById("main").style.marginLeft = "25%";
+  document.getElementById("mySidebar").style.width = "25%";
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("openNav").style.display = 'none';
+}
+function w3_close() {
+  document.getElementById("main").style.marginLeft = "0%";
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("openNav").style.display = "inline-block";
+}
+    </script>
+
+    </body>
 </html>

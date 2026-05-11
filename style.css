@@ -14,3 +14,54 @@ display: block;
     width: 30%;
     height: auto;
   }
+
+/* Zotero Publications overrides */
+.zotero-publications {
+    font-family: "Helvetica Neue", sans-serif;
+}
+
+.zotero-publications a {
+    color: #42602D;
+    text-decoration: none;
+}
+
+.zotero-publications a:hover {
+    text-decoration: underline;
+}
+
+.zotero-item-title {
+    color: #42602D;
+}
+
+.zotero-group-title {
+    font-size: 1.17em;
+    font-weight: bold;
+    color: #42602D;
+    margin: 1.2em 0 0.6em;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.zotero-line {
+    border-left-color: #42602D;
+}
+
+.zotero-btn {
+    border-color: #42602D;
+    color: #42602D;
+}
+
+.zotero-btn:hover,
+.zotero-btn:focus {
+    background-color: #42602D;
+    border-color: #42602D;
+    color: #fff;
+}
+
+.zotero-tab-active {
+    border-bottom: 2px solid #42602D;
+}
+
+.zotero-tab-active a {
+    color: #42602D;
+}
