@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
     <head>
         <meta charset="utf-8">
+        <meta name="description" content="日本語ノート">
         <title>Hayato Nasu's Homepage / Notes in Japanese</title>
         <script src="mathjax_setting.js" async></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,7 @@
         <link rel="stylesheet" href="fonts/academicons-1.9.4/css/academicons.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <link href="style.css" rel="stylesheet" type="text/css" media="all">
+        <link rel="stylesheet" href="zotero-publications.min.css">
     </head>
     <body class="w3-light-grey">
 
@@ -37,32 +39,115 @@
 
     <h1>Notes in Japanese</h1>
 
-    <h2 class="w3-large"><b><i class="fa fa-book-open fa-fw w3-margin-right" style="color:#42602D;"></i>Notes</b></h2>
-    <ul class="w3-ul w3-card-4">
-        <li>
-            <a href="Papers/cribleenrich.pdf">Crible豊穣圏のいろは</a>
-            <i class="fa fa-holly-berry"></i> 2023 Advent Calendar
-            <a href="https://adventar.org/calendars/8591"><i class="fa fa-external-link" style="color:#42602D;"></i></a>
-        </li>
-        <li>
-            <a href="Papers/introinter.pdf">圏の内部等式論理</a>
-            <i class="fa fa-holly-berry"></i> 2022 Advent Calendar
-            <a href="https://adventar.org/calendars/7888"><i class="fa fa-external-link" style="color:#42602D;"></i></a>
-        </li>
-        <li>
-            <a href="Papers/SEAR.pdf">A note on SEAR</a>
-            <i class="fa fa-hammer"></i> 2023.12.08 under construction
-        </li>
-    </ul>
+    <div id="container"></div>
 
             </div>
         </div>
     </div>
 
 <footer class="site-footer">
-    <span>Comments and questions are welcome: <a href="mailto:hnasu@dal.ca">hnasu [at] dal.ca</a></span>
+    <span>Hayato Nasu &mdash; PhD student, <a href="https://www.dal.ca/">Dalhousie University</a> &nbsp;&middot;&nbsp; <a href="mailto:hnasu@dal.ca">hnasu [at] dal.ca</a></span>
     <span class="site-footer-copy">&copy; Hayato Nasu</span>
 </footer>
+
+    <script src="zotero-publications.min.js"></script>
+    <script>
+        var zp = new ZoteroPublications({ group: false, expand: 'all' });
+        var promise = zp.getPublications(10978498);
+
+        promise.then(function(data) {
+            data.raw = data.data = data.raw.filter(function(item) {
+                return item.data.itemType === 'document';
+            });
+
+            var container = document.getElementById('container');
+            zp.render(data, container).then(function() {
+                data.raw.forEach(function(item) {
+                    var el = container.querySelector('[data-item="' + item.key + '"]');
+                    if (!el) return;
+
+                    var subline = el.querySelector('.zotero-item-subline');
+                    if (subline && subline.textContent.trimStart().startsWith('By ')) {
+                        var lastComma = subline.textContent.lastIndexOf(', ');
+                        subline.textContent = lastComma !== -1
+                            ? subline.textContent.slice(lastComma + 2)
+                            : '';
+                    }
+
+                    var titleEl = el.querySelector('.zotero-item-title');
+                    if (!titleEl) return;
+                    var hasPdf = false;
+                    titleEl.childNodes.forEach(function(node) {
+                        if (node.nodeType === Node.TEXT_NODE && /\[PDF\]/.test(node.textContent)) {
+                            hasPdf = true;
+                            node.textContent = node.textContent.replace(/\s*\[PDF\]/, '');
+                        }
+                    });
+                    var link = titleEl.querySelector('a');
+                    var pdfUrl = link ? link.href : '';
+                    if (link) link.replaceWith(document.createTextNode(link.textContent));
+
+                    if (item.data.url) {
+                        var urlLink = document.createElement('a');
+                        urlLink.href = item.data.url;
+                        urlLink.rel = 'nofollow';
+                        urlLink.className = 'zotero-url-link';
+                        urlLink.innerHTML = '<i class="fa fa-external-link"></i> Link';
+                        var header2 = el.querySelector('.zotero-item-header');
+                        if (header2) {
+                            var sub2 = header2.querySelector('.zotero-item-subline');
+                            if (sub2) sub2.appendChild(urlLink);
+                            else {
+                                var ns2 = document.createElement('div');
+                                ns2.className = 'zotero-item-subline';
+                                ns2.appendChild(urlLink);
+                                header2.appendChild(ns2);
+                            }
+                        }
+                    }
+
+                    if (item.data.extra) {
+                        var extraSpan = document.createElement('span');
+                        extraSpan.className = 'zotero-item-extra';
+                        extraSpan.textContent = item.data.extra;
+                        var header3 = el.querySelector('.zotero-item-header');
+                        if (header3) {
+                            var sub3 = header3.querySelector('.zotero-item-subline');
+                            if (sub3) sub3.appendChild(extraSpan);
+                            else {
+                                var ns3 = document.createElement('div');
+                                ns3.className = 'zotero-item-subline';
+                                ns3.appendChild(extraSpan);
+                                header3.appendChild(ns3);
+                            }
+                        }
+                    }
+
+                    if (!hasPdf || !pdfUrl) return;
+
+                    var btn = document.createElement('a');
+                    btn.href = pdfUrl;
+                    btn.rel = 'nofollow';
+                    btn.className = 'w3-button w3-green w3-round-large w3-small zotero-pdf-btn';
+                    btn.innerHTML = '<i class="fa fa-download"></i> PDF';
+
+                    var header = el.querySelector('.zotero-item-header');
+                    if (!header) return;
+                    var sub = header.querySelector('.zotero-item-subline');
+                    if (sub) {
+                        sub.appendChild(btn);
+                    } else {
+                        var newSub = document.createElement('div');
+                        newSub.className = 'zotero-item-subline';
+                        newSub.appendChild(btn);
+                        header.appendChild(newSub);
+                    }
+                });
+            });
+        });
+
+        promise.catch(function(reason) { console.warn(reason); });
+    </script>
 
     <script>
 function toggleNav() {
@@ -71,6 +156,12 @@ function toggleNav() {
 window.addEventListener("resize", function() {
     if (window.innerWidth >= 601) document.getElementById("navMobile").classList.remove("w3-show");
 });
+(function() {
+    var page = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.site-nav a.w3-bar-item').forEach(function(a) {
+        if (a.getAttribute('href') === page) a.classList.add('site-nav-active');
+    });
+})();
     </script>
 
     </body>

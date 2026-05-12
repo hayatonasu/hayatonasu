@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="description" content="Hayato Nasu is a PhD student at Dalhousie University specializing in categorical logic, category theory, and type theory.">
         <title>Hayato Nasu's Homepage</title>
         <script src="mathjax_setting.js" async></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -59,26 +60,7 @@
 
                     <h2 class="w3-large"><b><i class="fa fa-newspaper fa-fw w3-margin-right" style="color:#42602D;"></i>News / Updates</b></h2>
 
-                    <div class="news-item">
-                        <div class="news-meta">
-                            <i class="ai ai-arxiv news-icon"></i>
-                            <span class="news-date">2026.04</span>
-                        </div>
-                        <div class="news-body">
-                            New preprint <b>"On the decomposition of a strong epimorphism into regular epimorphisms"</b> is now available on arXiv:
-                            <a href="https://arxiv.org/abs/2604.05744">arXiv:2604.05744</a>.
-                        </div>
-                    </div>
-
-                    <div class="news-item">
-                        <div class="news-meta">
-                            <i class="fa fa-graduation-cap news-icon"></i>
-                            <span class="news-date">2026</span>
-                        </div>
-                        <div class="news-body">
-                            I am working on a project at <a href="https://adjointschool.com/2026.html">the Adjoint School 2026</a> on the topic of <b>"A Double Category Theoretic Perspective on Partiality"</b>.
-                        </div>
-                    </div>
+                    <div id="news-container"></div>
 
                 </div>
             </div>
@@ -86,7 +68,7 @@
     </div>
 
 <footer class="site-footer">
-    <span>Comments and questions are welcome: <a href="mailto:hnasu@dal.ca">hnasu [at] dal.ca</a></span>
+    <span>Hayato Nasu &mdash; PhD student, <a href="https://www.dal.ca/">Dalhousie University</a> &nbsp;&middot;&nbsp; <a href="mailto:hnasu@dal.ca">hnasu [at] dal.ca</a></span>
     <span class="site-footer-copy">&copy; Hayato Nasu</span>
 </footer>
 
@@ -97,6 +79,38 @@ function toggleNav() {
 window.addEventListener("resize", function() {
     if (window.innerWidth >= 601) document.getElementById("navMobile").classList.remove("w3-show");
 });
+(function() {
+    var page = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.site-nav a.w3-bar-item').forEach(function(a) {
+        if (a.getAttribute('href') === page) a.classList.add('site-nav-active');
+    });
+})();
+
+const iconMap = {
+    "arxiv": '<i class="ai ai-arxiv news-icon"></i>',
+    "graduation-cap": '<i class="fa fa-graduation-cap news-icon"></i>',
+    "file": '<i class="fa fa-file-text news-icon"></i>',
+    "globe": '<i class="fa fa-globe news-icon"></i>',
+    "star": '<i class="fa fa-star news-icon"></i>',
+    "school": '<i class="fa fa-school news-icon"></i>',
+    "document": '<i class="fa fa-file-lines news-icon"></i>',
+    "conference": '<i class="fa fa-chalkboard-user news-icon"></i>',
+};
+
+fetch("news.json")
+    .then(r => r.json())
+    .then(items => {
+        items = items.slice(0, 3);
+        const container = document.getElementById("news-container");
+        container.innerHTML = items.map(item => `
+            <div class="news-item">
+                <div class="news-meta">
+                    ${iconMap[item.icon] || '<i class="fa fa-circle news-icon"></i>'}
+                    <span class="news-date">${item.date}</span>
+                </div>
+                <div class="news-body">${item.body}</div>
+            </div>`).join("");
+    });
     </script>
 
     </body>
