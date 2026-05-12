@@ -1,150 +1,155 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta charset='utf-8'>
-        <title> Hayato Nasu's Homepage/Talks </title>
+        <meta charset="utf-8">
+        <meta name="description" content="Research talks and presentations by Hayato Nasu (Dalhousie University) on categorical logic and category theory.">
+        <title>Hayato Nasu's Homepage / Talks</title>
         <script src="mathjax_setting.js" async></script>
-        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
-        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
         <link rel="stylesheet" href="fonts/academicons-1.9.4/css/academicons.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <link href="style.css" rel="stylesheet" type="text/css" media="all">
+        <link rel="stylesheet" href="zotero-publications.min.css">
     </head>
     <body class="w3-light-grey">
-    <header> 
-    </header>
+
+    <nav class="w3-top w3-white site-nav">
+        <div class="w3-bar w3-padding-small">
+            <a href="index.html" class="w3-bar-item w3-button site-nav-brand">Hayato Nasu</a>
+            <div class="w3-right w3-hide-small">
+                <a href="papers.html" class="w3-bar-item w3-button">Research Papers</a>
+                <a href="talks.html" class="w3-bar-item w3-button">Research Talks</a>
+                <a href="others.html" class="w3-bar-item w3-button">Others</a>
+                <a href="notejapanese.html" class="w3-bar-item w3-button">日本語ノート</a>
+            </div>
+            <button class="w3-bar-item w3-button w3-right w3-hide-medium w3-hide-large" onclick="toggleNav()">&#9776;</button>
+        </div>
+        <div id="navMobile" class="w3-bar-block w3-white w3-hide">
+            <a href="papers.html" class="w3-bar-item w3-button w3-padding">Research Papers</a>
+            <a href="talks.html" class="w3-bar-item w3-button w3-padding">Research Talks</a>
+            <a href="others.html" class="w3-bar-item w3-button w3-padding">Others</a>
+            <a href="notejapanese.html" class="w3-bar-item w3-button w3-padding">日本語ノート</a>
+        </div>
+    </nav>
 
     <div class="w3-content w3-margin-top" style="max-width:1400px;">
-    <div class="w3-row-padding">
-        <button id="openNav" class="w3-button w3-xlarge" onclick="w3_open()">&#9776;</button>
+        <div class="w3-container">
+            <div id="main" class="w3-white w3-row-padding w3-margin-top" style="margin-left:3%;">
 
-        <div id="mySidebar" class="w3-sidebar w3-bar-block w3-animate-left w3-card" style="display:none">
-            <button class="w3-bar-item w3-button" onclick="w3_close()">&times;</button>
-            <a href="index.html" class="w3-bar-item w3-button">Home</a>
-            <a href="papers.html" class="w3-bar-item w3-button">Research papers</a>
-            <a href="talks.html" class="w3-bar-item w3-button">Research talks</a>
-            <a href="others.html" class="w3-bar-item w3-button">Others</a>
-            <a href="notejapanese.html" class="w3-bar-item w3-button">日本語ノート</a>
+    <h1>Research Talks</h1>
+
+    <div id="container-pres"></div>
+
+            </div>
+        </div>
     </div>
 
-    <div class="w3-container">
-    <div id="main" class="w3-white">
+    <script src="zotero-publications.min.js"></script>
+    <script>
+        (function() {
+            var zp = new ZoteroPublications({ group: false, expand: 'all' });
+            var promise = zp.getPublications(10978498);
+            promise.then(function(data) {
+                data.raw = data.data = data.raw.filter(function(item) {
+                    return item.data.itemType === 'presentation';
+                });
+                var container = document.getElementById('container-pres');
+                zp.render(data, container).then(function() {
+                    data.raw.forEach(function(item) {
+                        var el = container.querySelector('[data-item="' + item.key + '"]');
+                        if (!el) return;
+                        if (item.data.extra && /^featured:\s*true/im.test(item.data.extra)) {
+                            el.classList.add('zotero-item-featured');
+                        }
+                        var parts = [item.data.meetingName, item.data.place].filter(Boolean)
+                            .concat(item.data.date ? [item.data.date] : []);
+                        var subline = el.querySelector('.zotero-item-subline');
+                        if (parts.length) {
+                            if (subline) { subline.textContent = parts.join(', '); }
+                            else {
+                                var header = el.querySelector('.zotero-item-header');
+                                if (header) {
+                                    var ns = document.createElement('div');
+                                    ns.className = 'zotero-item-subline';
+                                    ns.textContent = parts.join(', ');
+                                    header.appendChild(ns);
+                                }
+                            }
+                        }
+                    });
+                    var hasFeatured = data.raw.some(function(item) {
+                        return item.data.extra && /^featured:\s*true/im.test(item.data.extra);
+                    });
+                    if (hasFeatured) {
+                        data.raw.forEach(function(item) {
+                            if (item.data.extra && /^featured:\s*true/im.test(item.data.extra)) return;
+                            var el = container.querySelector('[data-item="' + item.key + '"]');
+                            if (el) el.classList.add('zotero-item-hidden');
+                        });
+                        var toggleBtn = document.createElement('button');
+                        toggleBtn.className = 'filter-toggle-btn';
+                        toggleBtn.textContent = 'Show all talks';
+                        var showingAll = false;
+                        toggleBtn.addEventListener('click', function() {
+                            showingAll = !showingAll;
+                            container.classList.toggle('show-all', showingAll);
+                            toggleBtn.textContent = showingAll ? 'Show featured only' : 'Show all talks';
+                        });
+                        container.after(toggleBtn);
+                    }
+                    container.querySelectorAll('.zotero-item-title').forEach(function(titleEl) {
+                        var hasPdf = false;
+                        titleEl.childNodes.forEach(function(node) {
+                            if (node.nodeType === Node.TEXT_NODE && /\[PDF\]/.test(node.textContent)) {
+                                hasPdf = true;
+                                node.textContent = node.textContent.replace(/\s*\[PDF\]/, '');
+                            }
+                        });
+                        var link = titleEl.querySelector('a');
+                        var pdfUrl = link ? link.href : '';
+                        if (link) link.replaceWith(document.createTextNode(link.textContent));
+                        if (!hasPdf || !pdfUrl) return;
+                        var btn = document.createElement('a');
+                        btn.href = pdfUrl; btn.rel = 'nofollow';
+                        btn.className = 'w3-button w3-green w3-round-large w3-small zotero-pdf-btn';
+                        btn.innerHTML = '<i class="fa fa-download"></i> PDF';
+                        var header = titleEl.closest('.zotero-item-header');
+                        if (!header) return;
+                        var subline = header.querySelector('.zotero-item-subline');
+                        if (subline) { subline.appendChild(btn); }
+                        else {
+                            var ns2 = document.createElement('div');
+                            ns2.className = 'zotero-item-subline';
+                            ns2.appendChild(btn);
+                            header.appendChild(ns2);
+                        }
+                    });
+                });
+            });
+            promise.catch(function(reason) { console.warn(reason); });
+        })();
+    </script>
 
-    <div id="main" class="w3-white w3-row-padding w3-margin-top" style="margin-left:3%;">
-
-    <h1>Research talks</h1>
-    
-    <h2 class="w3-large"><b><i class="fa fa-person-chalkboard fa-fw w3-margin-right" style="color:#42602D;"></i>Talks</b></h2>
-    <ul class="w3-ul w3-card-4">
-        <li>
-            <b> On the decomposition of a strong epimorphism into regular epimorphism </b>
-            <ul class="w3-ul">
-            <li>
-                at ATCAT 2025, on December 2 2025.
-                <a href="Talks/atcat2025.pdf"><i class="fa fa-download"></i>Slides</a>
-            </li>
-            </ul>
-        </li>
-        <li>
-            <b> Categorical logic meets double categories (Chapter 2 of my master's thesis) </b>
-            <p>  </p>
-            </p>
-            <details>
-                <summary>
-                    <i class="fa fa-caret-square-down"></i>
-                    List of talks
-                </summary>
-            <ul class="w3-ul">
-            <li>
-                Categorical logic meets double categories, at CT 2025, on July 14 2025.
-                <a href="Talks/CT2025.pdf"><i class="fa fa-download"></i>Slides</a>
-            </li>
-            <li>
-                    Exploring double categories of relations,
-                    at 32nd Foundational Methods in Computer Science Workshop, on June 18 2025.
-                    <a href="Talks/FMCS2025.pdf"><i class="fa fa-download"></i>Slides</a>
-            </li>
-            <li>
-                    Double categories of relations relative to factorization systems and fibrations,
-                    at the 2025 CMS Summer Meeting, on June 8 2025.
-                    <a href="Talks/CMS2025.pdf"><i class="fa fa-download"></i>Slides</a>
-            </li>
-            <li>
-                    Cartesian bicategories and cartesian equipments: Categorical Logic Meets Double Categories- Side B,
-                    at CSCAT 2025, on March 11 2025.
-                    <a href="Talks/CSCAT2025.pdf"><i class="fa fa-download"></i>Slides</a>
-            </li>
-            <li>
-            Categorical logic meets double categories, at Logic Winter School, on February 21 2025.
-                <a href="Talks/LWS2025.pdf"><i class="fa fa-download"></i>Slides</a>
-            </li>
-            <li>
-                From Fibrations to Virtual Double Categories: Categorical Logic Meets Double Categories- Side A,
-                at Kyoto Category Theory Meeting, on February 22 2025
-                <a href="Talks/KCTM2025.pdf"><i class="fa fa-download"></i>Slides</a>
-            </li>
-            <li>
-                (Hyper)doctrines as virtual double categories, CSCAT2024 at the University of Chiba, on March 14 2024.
-                <a href="Talks/doctrine_as_vdc.pdf"><i class="fa fa-download"></i>Slides</a>
-                (This talk iss a preliminary version of the above talks.)
-            </li>
-            </ul>
-            </details>
-        </li>
-        <li>
-            <b> A Formal Theory of Anticolimits</b> 
-            <ul class="w3-ul">
-            <li>
-                at the workshop on Computer Science and Categorical Structures, on October 31 2024.
-                <a href="Talks/anticolimits_cscs2024.pdf"><i class="fa fa-download"></i>Slides</a>
-            </li>
-            </ul>
-        </li>
-        <li>
-            <b> Double categories of Relations Relative to Factorization Systems</b> 
-            <ul class="w3-ul">
-            <li>
-                at CT2024, on June 25 2024.
-                <a href="Talks/DCR-CT2024.pdf"><i class="fa fa-download"></i>Slides</a>
-            </li>
-            <li>
-                at at the Thursday Seminar at RIMS, Kyoto University, on November 16 2023.
-                <a href="Talks/DCR-thursdayseminar.pdf"><i class="fa fa-download"></i>Slides</a>
-            </li>
-            </ul>
-        </li>
-        <li>
-            <b> Structural Set Theory -- Towards SEFAR -- </b>
-            <ul class="w3-ul">
-            <li>
-            at the Mathematical Foundations seminar for Young Generation 2023, on December 08 2023.
-                <a href="Talks/Structural_set_theory_fmyg23.pdf"><i class="fa fa-download"></i>Slides</a>
-            </li>
-            </ul>
-        </li>
-    </ul>
-    </div>
-    </div>
-
-    <footer>
-        <p class="w3-right w3-small">
-        Comments are welcome! (email: hnasu [at] dal.ca)
-        </p>
-    </footer>
+<footer class="site-footer">
+    <span>Hayato Nasu &mdash; PhD student, <a href="https://www.dal.ca/">Dalhousie University</a> &nbsp;&middot;&nbsp; <a href="mailto:hnasu@dal.ca">hnasu [at] dal.ca</a></span>
+    <span class="site-footer-copy">&copy; Hayato Nasu</span>
+</footer>
 
     <script>
-        function w3_open() {
-  document.getElementById("main").style.marginLeft = "25%";
-  document.getElementById("mySidebar").style.width = "25%";
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("openNav").style.display = 'none';
+function toggleNav() {
+    document.getElementById("navMobile").classList.toggle("w3-show");
 }
-
-function w3_close() {
-  document.getElementById("main").style.marginLeft = "0%";
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("openNav").style.display = "inline-block";
-}
+window.addEventListener("resize", function() {
+    if (window.innerWidth >= 601) document.getElementById("navMobile").classList.remove("w3-show");
+});
+(function() {
+    var page = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.site-nav a.w3-bar-item').forEach(function(a) {
+        if (a.getAttribute('href') === page) a.classList.add('site-nav-active');
+    });
+})();
     </script>
+
+    </body>
+</html>

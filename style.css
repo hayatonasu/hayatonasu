@@ -1,7 +1,43 @@
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Helvetica Neue", sans-serif}
 p {font-family: "Helvetica Neue", sans-serif}
-summary {
-display: block;
+
+.site-nav {
+    position: sticky !important;
+    top: 0;
+    z-index: 100;
+    background-color: #42602D !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+}
+
+.site-nav .w3-bar {
+    background-color: #42602D !important;
+}
+
+.site-nav .w3-bar-item,
+.site-nav .w3-bar-item:visited {
+    color: #fff !important;
+}
+
+.site-nav-brand {
+    font-weight: bold;
+    font-size: 1.05em;
+    letter-spacing: 0.02em;
+}
+
+.site-nav a.w3-bar-item:hover,
+.site-nav button.w3-bar-item:hover {
+    background-color: rgba(255,255,255,0.15) !important;
+    color: #fff !important;
+}
+
+.site-nav a.site-nav-active {
+    background-color: rgba(255,255,255,0.22) !important;
+    font-weight: bold;
+}
+
+.site-nav .w3-bar-block {
+    background-color: #42602D !important;
+    border-top: 1px solid rgba(255,255,255,0.2);
 }
 
 @media (min-width: 572px) {
@@ -13,4 +49,218 @@ display: block;
 .responsive {
     width: 30%;
     height: auto;
-  }
+    float: right;
+    margin: 0 0 1em 1.5em;
+}
+
+/* Footer */
+.site-footer {
+    margin-top: 2.5em;
+    border-top: 1px solid #ccc;
+    padding: 1.2em 1.5em;
+    color: #666;
+    font-size: 0.85em;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1em;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.site-footer a {
+    color: #42602D;
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}
+
+.site-footer-copy {
+    margin-left: auto;
+}
+
+/* News items */
+.news-item {
+    display: flex;
+    gap: 1em;
+    padding: 0.75em 0;
+    border-left: 3px solid #42602D;
+    padding-left: 1em;
+    margin-bottom: 0.75em;
+}
+
+.news-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 4em;
+    color: #42602D;
+}
+
+.news-icon {
+    font-size: 1.4em;
+}
+
+.news-date {
+    font-size: 0.78em;
+    color: #777;
+    white-space: nowrap;
+    margin-top: 0.2em;
+}
+
+.news-body {
+    flex: 1;
+    line-height: 1.6;
+}
+
+/* Zotero Publications overrides */
+.zotero-item-authors {
+    color: #555;
+    font-size: 0.9em;
+    margin: 0.15em 0;
+}
+
+.zotero-item-location {
+    color: #555;
+    font-size: 0.9em;
+    margin: 0.15em 0;
+}
+
+.zotero-publications {
+    font-family: "Helvetica Neue", sans-serif;
+}
+
+.zotero-publications a {
+    color: #42602D;
+    text-decoration: none;
+}
+
+.zotero-publications a:hover {
+    text-decoration: underline;
+}
+
+.zotero-item-title {
+    color: #42602D;
+}
+
+.zotero-group-title {
+    font-size: 2em;
+    font-weight: bold;
+    color: #42602D;
+    margin: 0.67em 0;
+}
+
+.zotero-pdf-btn {
+    margin-left: 0.5em;
+    vertical-align: middle;
+}
+
+.zotero-url-link {
+    margin-left: 0.5em;
+    vertical-align: middle;
+    color: #42602D;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.zotero-url-link:hover {
+    text-decoration: underline;
+}
+
+.zotero-arxiv-btn {
+    margin-left: 0.5em;
+    vertical-align: middle;
+    color: #42602D;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.zotero-arxiv-btn:hover {
+    text-decoration: underline;
+}
+
+.zotero-item {
+    border-left: 3px solid #42602D;
+    padding: 0.6em 1em;
+    background-color: #ffffff;
+    border-radius: 4px;
+    margin-bottom: 0.5em;
+}
+
+body:not(.publication-page) .zotero-details,
+body:not(.publication-page) .zotero-item-actions {
+    display: none;
+}
+
+.zotero-item-hidden {
+    display: none;
+}
+
+.show-all .zotero-item-hidden {
+    display: list-item;
+}
+
+.filter-toggle-btn {
+    display: block;
+    margin-top: 1em;
+    margin-left: auto;
+    padding: 0.4em 1em;
+    border: 1px solid #42602D;
+    border-radius: 4px;
+    background: #fff;
+    color: #42602D;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9em;
+}
+
+.filter-toggle-btn:hover {
+    background: #42602D;
+    color: #fff;
+}
+
+.zotero-item-extra {
+    color: #555;
+    font-size: 0.88em;
+    margin-left: 0.6em;
+}
+
+.zotero-item-featured,
+.publication-page .zotero-item {
+    background-color: #f0f5ea;
+}
+
+.zotero-item-featured {
+    border-left: 4px solid #42602D;
+}
+
+.zotero-featured-badge {
+    color: #42602D;
+}
+
+.zotero-line {
+    display: none;
+}
+
+.zotero-btn {
+    border-color: #42602D;
+    color: #42602D;
+}
+
+.zotero-btn:hover,
+.zotero-btn:focus {
+    background-color: #42602D;
+    border-color: #42602D;
+    color: #fff;
+}
+
+.zotero-tab-active {
+    border-bottom: 2px solid #42602D;
+}
+
+.zotero-tab-active a {
+    color: #42602D;
+}
