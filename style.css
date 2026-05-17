@@ -241,6 +241,43 @@ body:not(.publication-page) .zotero-item-actions {
     color: #42602D;
 }
 
+
+.zotero-item-abstract-details {
+    margin-top: 0.6em;
+    border-top: 1px solid #e0e8d8;
+    padding-top: 0.4em;
+}
+
+.zotero-item-abstract-toggle {
+    font-size: 0.85em;
+    color: #42602D;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+}
+
+.zotero-item-abstract-toggle::-webkit-details-marker { display: none; }
+
+.zotero-item-abstract-toggle::before {
+    content: '▶';
+    font-size: 0.7em;
+    transition: transform 0.15s;
+}
+
+.zotero-item-abstract-details[open] > .zotero-item-abstract-toggle::before {
+    transform: rotate(90deg);
+}
+
+.zotero-item-abstract {
+    margin-top: 0.5em;
+    font-size: 0.88em;
+    color: #444;
+    line-height: 1.5;
+}
+
 .zotero-line {
     display: none;
 }

@@ -77,6 +77,59 @@
                                 }
                             }
                         }
+                        if (item.data.url) {
+                            var urlBtn = document.createElement('a');
+                            urlBtn.href = item.data.url;
+                            urlBtn.target = '_blank';
+                            urlBtn.rel = 'noopener noreferrer';
+                            var isYouTube = /youtube\.com|youtu\.be/.test(item.data.url);
+                            urlBtn.className = 'w3-button w3-blue w3-round-large w3-small zotero-pdf-btn';
+                            urlBtn.innerHTML = isYouTube ? '<i class="fa-brands fa-youtube"></i> YouTube' : '<i class="fa fa-link"></i> Link';
+                            var header = el.querySelector('.zotero-item-header');
+                            if (header) {
+                                var sublineUrl = header.querySelector('.zotero-item-subline');
+                                if (sublineUrl) { sublineUrl.appendChild(urlBtn); }
+                                else {
+                                    var ns3 = document.createElement('div');
+                                    ns3.className = 'zotero-item-subline';
+                                    ns3.appendChild(urlBtn);
+                                    header.appendChild(ns3);
+                                }
+                            }
+                        }
+                        if (item.data.abstractNote) {
+                            var details = document.createElement('details');
+                            details.className = 'zotero-item-abstract-details';
+                            var summary = document.createElement('summary');
+                            summary.className = 'zotero-item-abstract-toggle';
+                            summary.textContent = 'Abstract';
+                            var abs = document.createElement('div');
+                            abs.className = 'zotero-item-abstract';
+                            var urlPattern = /(https?:\/\/[^\s]+)/g;
+                            var parts = item.data.abstractNote.split(urlPattern);
+                            parts.forEach(function(part) {
+                                if (urlPattern.test(part)) {
+                                    var a = document.createElement('a');
+                                    a.href = part;
+                                    a.textContent = part;
+                                    a.target = '_blank';
+                                    a.rel = 'noopener noreferrer';
+                                    abs.appendChild(a);
+                                } else {
+                                    abs.appendChild(document.createTextNode(part));
+                                }
+                                urlPattern.lastIndex = 0;
+                            });
+                            details.appendChild(summary);
+                            details.appendChild(abs);
+                            el.appendChild(details);
+                            (window.MathJax && MathJax.startup
+                                ? MathJax.startup.promise
+                                : Promise.resolve()
+                            ).then(function() {
+                                if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([abs]);
+                            });
+                        }
                     });
                     var hasFeatured = data.raw.some(function(item) {
                         return item.data.extra && /^featured:\s*true/im.test(item.data.extra);
